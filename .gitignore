@@ -1,0 +1,7 @@
+*.out
+*.log
+*.logs.sig
+
+.metrix.sig
+
+.DS_Store
