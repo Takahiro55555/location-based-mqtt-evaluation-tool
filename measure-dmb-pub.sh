@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ARG="${1} ${2} ${3} ${4} ${5} ${6} ${7} ${8} ${9} ${10} ${11} ${12} ${13} ${14} ${15} ${16} ${17} ${18} ${19} ${20}"
-EXECFILE="publisher.go"
-EXECFILE_DIR="cmd/dmb-publisher/main.go"
+EXECFILE="main.go"
+EXECFILE_DIR="cmd/dmb-publisher/"
 LOGFILE_DIR="logs/dmb/pub/$(python3 -c "from datetime import datetime as dt;print(dt.now().strftime('%Y-%m-%d/%H'))")"
 LOGFILE="${LOGFILE_DIR}/$(python3 -c "from datetime import datetime as dt;print(dt.now().strftime('%Y%m%d-%H%M%S-%f'))").log"
 LOGFILE_SIG="logs/`hostname`.logs.sig"
@@ -17,7 +17,7 @@ fi
 SELF_MD5SUM=`${SIG_CMD} ${0}`
 cd ${EXECFILE_DIR}
 EXECFILE_MD5SUM=`${SIG_CMD} ${EXECFILE}`
-go run ${EXECFILE} ${ARG} | tee -a ../${LOGFILE}
+go run ${EXECFILE} ${ARG} | tee -a ../../${LOGFILE}
 cd -
 LOGFILE_SIG_MD5SUM=`${SIG_CMD} ${LOGFILE_SIG}`
 LOGFILE_SIG_LEN=`cat ${LOGFILE_SIG} | wc -l`
